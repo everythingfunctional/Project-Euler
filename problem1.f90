@@ -1,4 +1,5 @@
 Program problem1
+!Sum all multiples of 3 or 5 that are less than iUP
 iUP = 1000
 nSUM = 0
 Do i = 3, iUP-1, 3
