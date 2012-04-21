@@ -1,19 +1,20 @@
 Program problem4
-Logical :: Lpal
-Do I = 99, 10, -1
-  Do J = 99, 10, -1
+Do I = 999, 100, -1
+  Do J = 999, 100, -1
     nProd = I*J
-    Lpal = palchk(nProd)
-    If ( Lpal .AND. nProd > maxpal ) Then
-      maxpal = nProd
+    !Print *, 'Product is ',nProd
+    Lpal = npalchk(nProd)
+    !Print *, 'Lpal is passed',Lpal,'and nProd is',nProd
+    If ( Lpal == 1 .AND. I*J > maxpal ) Then
+      !Print *, 'Palindrome found',I*J
+      maxpal = I*J
     End If
   End Do
 End Do
-
+Print *, 'Max. Plaindrome is ',maxpal
 End Program problem4
-Function palchk(num)
+Function npalchk(num)
 Allocatable :: numa(:)
-Logical :: palchk
 k = 0
 Do
   k = k+1
@@ -22,15 +23,22 @@ Do
     Exit
   End If
 End Do
-nchk = Floor(iSize/2)
+nchk = Floor(REAL(iSize/2))
 Allocate (numa(0:iSize-1))
 Do k = iSize-1, 0, -1
-  numa(k) = Floor(numa/(10**k))
+  numa(k) = Floor(REAL(num/(10**k)))
   num = num - numa(k)*10**k
 End Do
-If ( numa(0:nchk-1) == numa(iSize-1:iSize-nchk:-1) ) Then
-  palchk = .TRUE.
-Else
-  palchk = .FALSE.
-End If
-End Function palchk
+Do k = 0, nchk-1
+  If ( numa(k) /= numa(iSize-k-1) ) Then
+    npalchk = 0
+    Exit
+  Else
+    npalchk = 1
+  End If
+End Do
+!If ( npalchk == 1 ) Then
+!  Print *, 'palindrome found of size',iSize
+!End If
+Return
+End Function npalchk
