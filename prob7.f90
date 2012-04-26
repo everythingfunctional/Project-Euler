@@ -1,4 +1,4 @@
-Program prob381
+Program problem7
 Implicit Integer (Selected_Int_Kind(16)) (I-N)
 Logical, Allocatable :: lprime(:)
 Integer :: iprime(1:10000000)
@@ -23,21 +23,6 @@ Do i = nEND/2+1, nEND, 2
     !Print *, 'Prime',nprimes,'is',i
   End If
 End Do
-nsum=0
-Print *, 'Number of primes is',nprimes
-Do np = nprimes, 3, -1
-  nmod = iprime(np)+(iprime(np)-3)/2+1 ! (p-1)+(1)+((p-3)/2+1)+
-  Do k = 4, 5
-    nfact = 1
-    Do j = iprime(np)-k, 2, -1
-      nfact = nfact*j
-      nfact = mod(nfact,iprime(np))
-    End Do
-    nmod = nmod+nfact
-    !Print *, 'Factorial for',iprime(np)-k,'=',nfact
-  End Do
-  Print *, 'Function for',iprime(np),'=',mod(nmod,iprime(np))
-  nsum = nsum+mod(nmod,iprime(np))
-End Do
-Print *, 'Answer is ',nsum
-End Program prob381
+Print *, 'Prime 6 is',iprime(6)
+Print *, 'Prime 10001 is',iprime(10001)
+End Program problem7
