@@ -29,10 +29,16 @@ Do np = nprimes, 3, -1
   nmod = iprime(np)+(iprime(np)-3)/2+1 ! (p-1)+(1)+((p-3)/2+1)+
   Do k = 4, 5
     nfact = 1
-    Do j = iprime(np)-k, 2, -1
-      nfact = nfact*j
-      nfact = mod(nfact,iprime(np))
-    End Do
+    If ( k == 4 .AND. mod(iprime(np)+1,6) == 0 ) Then
+      nfact = (iprime(np)+1)/6
+    Else If ( k == 5 .AND. mod(iprime(np)-1,24) == 0 ) Then
+      nfact = (iprime(np)-1)/24
+    Else
+      Do j = iprime(np)-k, 2, -1
+        nfact = nfact*j
+        nfact = mod(nfact,iprime(np))
+      End Do
+    End If
     nmod = nmod+nfact
     !Print *, 'Factorial for',iprime(np)-k,'=',nfact
   End Do
