@@ -1,6 +1,7 @@
 Program problem11
 Implicit Integer (Selected_Int_Kind(16)) (I-N)
-Integer (Selected_Int_Kind(16)) :: numbers(1:20,1:20), nhorizontal(1:20,1:17), nvertical(1:17,1:20), ndiaganolr(1:17,1:17), ndiaganoll(1:17,4:20)
+Integer (Selected_Int_Kind(16)) :: numbers(1:20,1:20), nhorizontal(1:20,1:17), nvertical(1:17,1:20)
+Integer (Selected_Int_Kind(16)) :: ndiaganoll(1:17,4:20), ndiaganolr(1:17,1:17)
 LUIN = 1
 Open (LUIN,File='prob11numbers.txt',Status='OLD')
 Do i = 1, 20
@@ -70,8 +71,8 @@ Do i = 1, 17
     If ( mult > nANS) nANS = mult
   End Do
 End Do
-Do i = 4, 20
-  Write ( LUOUT, * ) ndiaganoll(i,1:17)
+Do i = 1, 17
+  Write ( LUOUT, * ) ndiaganoll(i,4:20)
 End Do
 Write ( LUOUT, * ) 'Answer after diaganolleft',nANS
 Write ( LUOUT, * ) 'Max diaganol',maxval(ndiaganoll(1:17,4:20))
