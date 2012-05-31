@@ -2,16 +2,16 @@ Program problem26
 Integer :: dig(1:100)
 maxlen=0
 Do n = 2, 1000
-  num=10
+  irem=10
   dig(:)=0
   i=0
   ! Division Loop
   Divide: Do
     i=i+1
-    dig(i)= floor(real(num/n))
-    If ( mod(num,n) == 0 ) Exit ! Division Ended
+    dig(i)= floor(real(irem/n))
+    If ( mod(irem,n) == 0 ) Exit ! Division Ended
     ! Calculate Remainder
-    num = 10*mod(num,n)
+    irem = 10*mod(irem,n)
     ! If String is long enough see if it has repetition
     If ( i >  maxlen ) Then
      Do j = 1, floor(real(i/2))
