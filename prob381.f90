@@ -2,7 +2,7 @@ Program prob381
 Implicit Integer (Selected_Int_Kind(16)) (I-N)
 Logical, Allocatable :: lprime(:)
 Integer :: iprime(1:10000000)
-nEND = 10**8
+nEND = 100!**8
 Allocate (lprime(2:nEND))
 lprime(3:nEND:2) = .TRUE.
 lprime(2:nEND:2) = .FALSE.
@@ -40,7 +40,7 @@ Do np = nprimes, 3, -1
       End Do
     End If
     nmod = nmod+nfact
-    !Print *, 'Factorial for',iprime(np)-k,'=',nfact
+    Print *, 'Factorial for',iprime(np)-k,'=',nfact
   End Do
   Print *, 'Function for',iprime(np),'=',mod(nmod,iprime(np))
   nsum = nsum+mod(nmod,iprime(np))
