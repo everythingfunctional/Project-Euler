@@ -1,6 +1,6 @@
 Program problem29
-Integer (Selected_Int_Kind(16)) :: numbers(1:10000,1:100), pow(1:100)
-
+Integer (Selected_Int_Kind(16)) :: numbers(1:10000,1:100), pow(1:100), numlen(1:10000)
+Logical :: lfound
 numunique = 0
 Do nA = 2, 100
   Do nB = 2, 100
@@ -23,15 +23,26 @@ Do nA = 2, 100
       If ( pow(lenpow+1) > 0 ) lenpow=lenpow+1
     End Do
     ! Check to see if we have encoutered this number before
+    lfound = .FALSE.
     Do i = 1, numunique
-      Do j = 1, lenpow
-        If ( pow(j) /= numbers(i,j) ) Exit !If we exit this loop early, the number does not equal the one we are checking
-      End Do
-      If ( j > lenpow ) Exit !If we exit this loop early, the number is not unique
+      If ( numlen(i) == lenpow ) Then
+        Do j = 1, lenpow
+          If ( pow(j) /= numbers(i,j) ) Then
+            lfound = .FALSE.
+            Exit !If we exit this loop early, the number does not equal the one we are checking
+          Else
+            lfound = .TRUE.
+          End If
+        End Do
+      Else
+        lfound = .FALSE.
+      End If
+      If ( lfound ) Exit !If we exit this loop early, the number is not unique
     End Do
     ! If number is unique we will store it and add one to our count
-    If ( i > numunique ) Then
+    If ( .NOT. lfound ) Then
       numbers(i,:) = pow(:)
+      numlen(i) = lenpow
       numunique = numunique+1
       Print *, 'Found new unique number'
       Print '(100I5)', numbers(numunique,lenpow:1:-1)
