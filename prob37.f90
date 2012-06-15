@@ -1,7 +1,8 @@
 Program problem37
 Logical, allocatable :: lprime(:)
 Logical :: ltrunc
-nEND = 100000
+nEND = 1000000
+nANS = 0
 allocate (lprime(2:nEND))
 lprime(:) = .TRUE.
 lprime(4:nEND:2) = .FALSE.
@@ -15,8 +16,10 @@ Do i = 11, nEND, 2
     length = 1+log10(real(i))
     num = i
     ltrunc = .TRUE.
+    !Print *, 'Found Prime',i
     Do j = 1, length-1
       num = floor(real(num/10))
+      !Print *, 'Truncated from left',j,'times is',num
       If ( .NOT. lprime(num) ) Then
         ltrunc = .FALSE.
         Exit
@@ -26,7 +29,8 @@ Do i = 11, nEND, 2
     num = i
     ltrunc = .TRUE.
     Do j = length-1, 1, -1
-      num = num - floor(real(num/10**(j)))
+      num = num - floor(real(num/10**j))*10**j
+      !Print *, 'Truncated from right',length-j,'times is',num
       If ( .NOT. lprime(num) ) Then
         ltrunc = .FALSE.
         Exit
@@ -38,5 +42,6 @@ Do i = 11, nEND, 2
     End If
   End If
 End Do
+Print *, 'Sum of them is',nANS
 
 End Program problem37
