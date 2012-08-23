@@ -16,7 +16,7 @@ Do
       nstop = num/j
     End If
   End Do
-  Print *, num,'has',ndiv,'divisors'
+  !Print *, num,'has',ndiv,'divisors'
   If ( ndiv > nend ) Then
     Print *, 'First triangle to have more than',nend,'divisors is',num
     Exit
